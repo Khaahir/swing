@@ -10,7 +10,7 @@ const signUpSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    maxlength: 25,
+    maxlength: 150,
   },
 });
 

@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import SingUp from "../model/signUpSchema.js";
+import bcrypt from "bcryptjs";
 dotenv.config();
 const router = express.Router();
 
@@ -14,9 +15,12 @@ router.post("/", async (req, res) => {
         .json({ Message: "you have to use username and password" });
     }
 
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password , salt)
+
     const newUser = new SingUp({
       username,
-      password,
+    password: hashedPassword,
     });
 
     await newUser.save();
