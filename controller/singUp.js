@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import SingUp from "../model/signUpSchema.js";
+import user from "../model/signUpSchema.js";
 import bcrypt from "bcryptjs";
 dotenv.config();
 const router = express.Router();
@@ -18,7 +18,12 @@ router.post("/", async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password , salt)
 
-    const newUser = new SingUp({
+   const existingUser = await user.findOne({username})
+   if(existingUser){
+    return res.status(400).json({Message: "user already exsist"})
+   }
+
+    const newUser = new user({
       username,
     password: hashedPassword,
     });

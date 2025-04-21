@@ -1,12 +1,13 @@
 import express from "express";
 import Note from "../model/noteSchema.js";
 import dotenv from "dotenv";
+import authUserMiddleware from "../authMiddleware.js";
 
 dotenv.config();
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", authUserMiddleware, async (req, res) => {
   try {
     const notes = await Note.find();
     res.status(200).json(notes);
@@ -17,7 +18,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", authUserMiddleware,   async (req, res) => {
   try {
     const { title, text } = req.body;
 
@@ -41,7 +42,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authUserMiddleware, async (req, res) => {
   try {
     const { title, text } = req.body;
     if (!title || !text) {
@@ -64,7 +65,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authUserMiddleware, async (req, res) => {
   try {
     const deleteNote = await Note.findByIdAndDelete(req.params.id);
 

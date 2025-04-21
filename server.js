@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import notes from "./controller/notes.js";
 import singUp from "./controller/singUp.js";
+import login from "./controller/login.js"
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -19,6 +20,8 @@ dataBase.once("connected", () => {
 });
 app.use("/api/notes", notes);
 app.use("/api/signup", singUp);
+app.use("/api/login", login)
+
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
