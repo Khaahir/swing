@@ -68,7 +68,7 @@ if(!checkPassword){
 try{
     const token = jwt.sign({
         id: findUser._id, username: findUser.username
-    }, process.env.SECRET_KEY,
+    }, process.env.AUTH_KEY,
     {expiresIn: "1hr"})
     
     res.json({message: "logged in", token})

@@ -14,7 +14,7 @@ if(!authHeader || !authHeader.startsWith("Bearer")){
 const token = authHeader.split(" ")[1]
 
 try{
-    const decode = jwt.verify(token, process.env.SECRET_KEY)
+    const decode = jwt.verify(token, process.env.AUTH_KEY)
     req.user = decode
     next()
 }catch(error){
