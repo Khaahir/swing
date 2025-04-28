@@ -18,7 +18,7 @@ try{
     req.user = decode
     next()
 }catch(error){
-    res.status(401).json({Message: "invalid or expiered token"})
+    res.status(401).json({message: "invalid or expiered token"})
 }
 }
 

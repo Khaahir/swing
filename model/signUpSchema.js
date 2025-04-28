@@ -1,17 +1,20 @@
-import mongoose, { model } from "mongoose";
+import mongoose from "mongoose";
 
 const signUpSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    maxlength: 10,
+    unique: true, 
+    minlength: 3, 
+    maxlength: 50, 
   },
 
   password: {
     type: String,
     required: true,
-    maxlength: 150,
+    minlength: 6, 
+    maxlength: 150, 
   },
-});
+}, { timestamps: true }); 
 
-export default mongoose.model("user", signUpSchema);
+export default mongoose.model("User", signUpSchema);

@@ -10,7 +10,7 @@ const NoteSchema = new mongoose.Schema(
     text: {
       required: true,
       type: String,
-      maclength: 300,
+      maxlength: 300,
     },
   },
   { timestamps: true }
