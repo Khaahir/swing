@@ -15,7 +15,7 @@ const token = authHeader.split(" ")[1]
 
 try{
     const decode = jwt.verify(token, process.env.AUTH_KEY)
-    req.user = decode
+    req.user = ({id: decode.id})
     next()
 }catch(error){
     res.status(401).json({message: "invalid or expiered token"})

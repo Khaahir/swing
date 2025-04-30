@@ -12,6 +12,9 @@ const NoteSchema = new mongoose.Schema(
       type: String,
       maxlength: 300,
     },
+    userId:{
+      type:mongoose.Schema.Types.ObjectId, ref: "User", required: true
+    }
   },
   { timestamps: true }
 );

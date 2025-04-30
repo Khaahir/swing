@@ -44,7 +44,7 @@ const router = express.Router();
 
 router.get("/", authUserMiddleware, async (req, res) => {
   try {
-    const notes = await Note.find();
+    const notes = await Note.find({userId: req.user.id});
     res.status(200).json(notes);
   } catch (err) {
     res
@@ -106,6 +106,7 @@ router.post("/", authUserMiddleware,   async (req, res) => {
     const newNote = new Note({
       title,
       text,
+      userId: req.user.id
     });
 
     await newNote.save();
